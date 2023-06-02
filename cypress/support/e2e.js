@@ -13,6 +13,12 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+// Import commands.js using ES2015 syntax:
+import './commands';
+
+// Alternatively you can use CommonJS syntax:
+// require('./commands')
+
 Cypress.on('uncaught:exception', () => {
   return false;
 });
@@ -26,9 +32,3 @@ if (!app.document.head.querySelector('[data-hide-command-log-request]')) {
 
   app.document.head.appendChild(style);
 };
-
-// Import commands.js using ES2015 syntax:
-import './commands'
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')

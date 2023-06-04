@@ -39,6 +39,12 @@ describe('Cypress application', () => {
   });
   });
   it('should have the ability to enter text to alert', () => {
-   
+    cy.window().then((win) => {
+    cy.stub(win, 'prompt').returns('Oleh')
+    cy.get('#promtButton')
+      .click()
+    cy.get('#promptResult')
+      .should('contain', 'You entered Oleh');
+  });
   });
 });

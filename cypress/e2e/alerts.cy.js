@@ -45,7 +45,14 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to enter text to alert', () => {
+    const allertInput = 'My name is Yuliia';
+    cy.window().then((win) => {
+      cy.stub(win, 'prompt')
+        .returns(allertInput);
+    });
     cy.get('#promtButton')
       .click();
+    cy.get('#promptResult')
+      .should('contain', `You entered ${allertInput}`);
   });
 });

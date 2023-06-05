@@ -11,7 +11,7 @@ describe('Cypress application', () => {
     });
   });
 
-  it.only('should have the ability to assert scheduled alert', () => {
+  it('should have the ability to assert scheduled alert', () => {
     cy.get('#timerAlertButton', { timeout: 5000 }).click();
 
     cy.on('window:alert', (text) => {

@@ -49,7 +49,7 @@ describe('Cypress application', () => {
       cy.get('#promtButton')
         .click()
       cy.get('#promptResult')
-        .should('contain', 'You entered Irynagit');
+        .should('contain', 'You entered Iryna');
     });
   });
 });

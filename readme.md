@@ -15,7 +15,7 @@
 ### Basic level
 
 Read the documentation about the [Catalog of Events](https://docs.cypress.io/api/cypress-api/catalog-of-events).
-
+https://demoqa.com/alerts
 App for testing: [DemoQA](https://demoqa.com/alerts)
 
 **Your task** is to automate the next flow:

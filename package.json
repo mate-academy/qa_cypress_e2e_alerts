@@ -19,5 +19,15 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.9.0",
     "typescript": "^4.9.5"
-  }
+  },
+  "name": "qa_cypress_e2e_alerts",
+  "description": "## Workflow",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

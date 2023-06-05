@@ -1,25 +1,38 @@
 describe('Cypress application', () => {
-  before(() => {
-
+  it('should assert the text inside the alert after clicking the first button', () => {
+    cy.visit('https://demoqa.com/alerts');
+    cy.get('button#alertButton').click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.eq('You clicked a button');
+    });
   });
 
-  it('should have the ability to assert automatically resolved alerts', () => {
-
+  it('should assert the text inside the alert after clicking the second button with a delay', () => {
+    cy.visit('https://demoqa.com/alerts');
+    cy.get('button#timerAlertButton').click();
+    cy.wait(5000);
+    cy.on('window:alert', (str) => {
+      expect(str).to.eq('This alert appeared after 5 seconds');
+    });
   });
 
-  it('should have the ability to assert scheduled allert', () => {
-
+  it('should assert the text inside the alert after clicking the third button', () => {
+    cy.visit('https://demoqa.com/alerts');
+    cy.get('button#confirmButton').click();
+    cy.on('window:confirm', (str) => {
+      expect(str).to.eq('Do you confirm action?');
+      return true; 
+    });
+    cy.on('window:alert', (str) => {
+      expect(str).to.eq('You selected Ok');
+    });
   });
 
-  it('should autimatically resolve alerts', () => {
-
-  });
-
-  it('should have the ability to Cancel alerts', () => {
-
-  });
-
-  it('should have the ability to enter text to alert', () => {
-
+  it('should assert the name is shown on the page after clicking the fourth button and entering the name', () => {
+    cy.visit('https://demoqa.com/alerts');
+    cy.get('button#promtButton').click();
+    cy.window().then((win) => {
+      cy.stub(win, 'prompt').returns('Olga');
+    });
   });
 });

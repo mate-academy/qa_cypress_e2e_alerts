@@ -45,7 +45,13 @@ describe('Cypress application', () => {
     .should('contain', 'You selected Cancel');
   });
 
-  it('should have the ability to enter text to alert', () => {
-
+  it.only('should have the ability to enter text to alert', () => {
+      cy.window().then((win) => {
+      cy.stub(win, 'prompt').returns('Test')
+      cy.get('#promtButton')
+        .click()
+      cy.get('#promptResult')
+        .should('contain', 'You entered Test');
+    });
   });
 });

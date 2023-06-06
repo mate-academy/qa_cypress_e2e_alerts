@@ -12,7 +12,7 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton').click();
-    cy.on('window:load', (text) => {
+    cy.on('window:alert', (text) => {
       expect(text).to.equal('This alert appeared after 5 seconds');
     });
   });

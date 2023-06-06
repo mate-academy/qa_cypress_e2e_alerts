@@ -14,8 +14,8 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton')
-      .click();
-
+      .click()
+      .wait(5000);
     cy.on('window:alert', (text) => {
       expect(text).to.contains('This alert appeared after 5 seconds');
     });
@@ -24,19 +24,22 @@ describe('Cypress application', () => {
   it('should autimatically resolve alerts', () => {
     cy.get('#confirmButton')
       .click();
-
     cy.on('window:confirm', (text) => {
       expect(text).to.contains('Do you confirm action?');
+      cy.get('#confirmResult')
+      .should('contain', 'You selected Ok');
+      return true;
     });
   });
 
   it('should have the ability to Cancel alerts', () => {
     cy.get('#confirmButton')
       .click();
-
-    cy.on('window:confirm', (text) => {
-      expect(text).to.contains('Do you confirm action?');
-      return false;
+    cy.on('window:confirm', (str) => {
+        expect(str).to.equal('Do you confirm action?')
+      cy.get('#confirmResult')
+        .should('contain', 'You selected Cancel');
+        return false;
     });
   });
 

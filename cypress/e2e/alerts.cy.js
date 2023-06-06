@@ -16,6 +16,8 @@ describe('Cypress application', () => {
     cy.get('#timerAlertButton')
       .click();
 
+    cy.wait(5000);
+
     cy.on('window:alert', (text) => {
       expect(text).to.contains('This alert appeared after 5 seconds');
     });

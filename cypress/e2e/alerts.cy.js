@@ -25,7 +25,7 @@ describe('Cypress application', () => {
 
     cy.on('window:confirm', (confirm) => {
       expect(confirm).to.eq('Do you confirm action?');
-      cy.get('#confirmResult').contains('You selected Ok');
+      cy.get('#confirmResult').should('contain', 'You selected Ok');
     });
   });
 
@@ -41,7 +41,7 @@ describe('Cypress application', () => {
     cy.window().then((win) => {
       cy.get('#promtButton').click();
       cy.stub(win, 'prompt').returns('My Name');
-      cy.get('#promptResult').contains('You entered My Name');
+      cy.get('#promptResult').should('contain', 'You entered My Name');
     })
   })
 });

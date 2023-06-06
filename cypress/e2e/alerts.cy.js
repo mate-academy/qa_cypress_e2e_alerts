@@ -28,11 +28,14 @@ describe('Cypress application', () => {
     });
   });
 
-  it('should assert the name is shown on the page after clicking the fourth button and entering the name', () => {
+  it('should have the ability to enter text to alert', () => {
     cy.visit('https://demoqa.com/alerts');
-    cy.get('button#promtButton').click();
+    cy.get('#promtButton').should('exist'); 
+    cy.get('#promtButton').click();
     cy.window().then((win) => {
       cy.stub(win, 'prompt').returns('Olga');
     });
+    cy.get('#promptResult').should('contain', 'You entered Olga');
   });
-});
+  });
+

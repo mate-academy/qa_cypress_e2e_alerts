@@ -42,7 +42,7 @@ describe('Cypress application', () => {
       .should('contain', 'You selected Cancel');
   });
 
-  it.only('should have the ability to enter text to alert', () => {
+  it('should have the ability to enter text to alert', () => {
     cy.window().then((win) => {
       cy.stub(win, 'prompt').returns('Maks');
       cy.get('#promtButton')

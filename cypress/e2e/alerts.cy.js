@@ -1,5 +1,5 @@
 describe('Cypress application', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('https://demoqa.com/alerts');
   });
 

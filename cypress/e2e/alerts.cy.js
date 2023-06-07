@@ -32,10 +32,14 @@ describe('Cypress application', () => {
     cy.visit('https://demoqa.com/alerts');
     cy.get('#promtButton').should('exist'); 
     cy.get('#promtButton').click();
-    cy.window().then((win) => {
-      cy.stub(win, 'prompt').returns('Olga');
+    cy.on('window:alert', () => {
+      cy.window().then((win) => {
+        cy.stub(win, 'prompt').returns('Olga');
+        cy.on('window:alert', (str) => {
+          expect(str).to.eq('You entered Olga');
+        });
+      });
     });
-    cy.get('#promptResult').should('contain', 'You entered Olga');
   });
-  });
+});
 

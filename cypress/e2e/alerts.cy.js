@@ -37,9 +37,9 @@ describe('Cypress application', () => {
     });
 
     // Assert "You selected Ok" message
-    cy.on('window:alert', (str) => {
-      expect(str).to.eq('You selected Ok');
-    });
+  cy.on('window:alert', () => {
+  cy.get('#confirmResult').should('have.text', 'You selected OK');
+});
   });
 
   it('should assert the text inside the alert after clicking the third button', () => {
@@ -55,8 +55,8 @@ describe('Cypress application', () => {
     });
 
     // Assert "You selected Ok" message
-    cy.on('window:alert', (str) => {
-      expect(str).to.eq('You selected Cancel');
+    cy.on('window:alert', () => {
+    cy.get('#confirmResult').should('have.text', 'You selected Cancel');
     });
   });
 });

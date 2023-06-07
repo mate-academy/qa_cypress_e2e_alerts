@@ -5,7 +5,6 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to assert automatically resolved alerts', () => {
-    cy.get('#alertButton').click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal('You clicked a button');
     })
@@ -14,19 +13,17 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton').click();
-    cy.get('#timerAlertButton').click();
-    cy.window().then((win) => {
-      cy.stub(win, 'alert').as('windowAlert');
+    cy.wait(5000);
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('This alert appeared after 5 seconds');
     });
-    cy.on('window:confirm', () => true);
   });
 
   it('should autimatically resolve alerts', () => {
     cy.get('#confirmButton').click();
     cy.on('window:confirm', (str) => {
       expect(str).to.equal(`Do you confirm action?`)
-    })
-    cy.on('window:confirm', () => true);
+    });
     cy.get('#confirmResult').should('have.text', 'You selected Ok');
   });
 
@@ -40,7 +37,6 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to enter text to alert', () => {
-    cy.get('#promtButton').click();
       cy.window().then((win) => {
       cy.stub(win, 'prompt').returns('Anna');
       });

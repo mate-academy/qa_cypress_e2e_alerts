@@ -5,7 +5,8 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert automatically resolved alerts', () => {
     cy.get('#alertButton')
-      .click();
+      .click()
+      .wait(5000)
 
     cy.on('window:alert', (str) => {
       expect(str).to.equal('You clicked a button');
@@ -14,7 +15,8 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton')
-      .click();
+      .click()
+      .wait(5000)
 
     cy.on('window:alert', (str) => {
       expect(str).to.equal('This alert appeared after 5 seconds');
@@ -30,9 +32,8 @@ describe('Cypress application', () => {
       return true;
     });
 
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal('You selected Ok');
-    });
+    cy.get('#confirmResult')
+      .should('contain', 'You selected Ok');
   });
 
   it('should have the ability to Cancel alerts', () => {
@@ -44,10 +45,9 @@ describe('Cypress application', () => {
       return false; 
     });
 
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal('You selected Cancel');
+    cy.get('#confirmResult')
+      .should('contain', 'You selected Cancel');
     });
-  });
 
   it('should have the ability to enter text to alert', () => {
     const name = 'Name';

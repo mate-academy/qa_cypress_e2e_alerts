@@ -6,7 +6,11 @@ const alertMessage = {
 
 describe('Cypress application', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/', {
+      onBeforeLoad(win) {
+        cy.stub(win, 'prompt').returns('Test');
+      }
+    });
   });
 
   it('should have the ability to assert automatically resolved alerts', () => {
@@ -47,5 +51,11 @@ describe('Cypress application', () => {
     });
 
     cy.findById('confirmResult').should('contain', 'You selected Cancel');
+  });
+
+  it('should have the ability to enter text to alert', () => {
+    cy.get('#promtButton').click();
+
+    cy.get('#promptResult').should('contain', 'You entered Test');
   });
 });

@@ -28,7 +28,7 @@ describe('Cypress application', () => {
     cy.get('#confirmResult').should('contain', 'You selected Ok');
   });
 
-  it.only('should have the ability to Cancel alerts', () => {
+  it('should have the ability to Cancel alerts', () => {
     cy.get('#confirmButton').click();
 
     cy.on('window:confirm', (text) => {

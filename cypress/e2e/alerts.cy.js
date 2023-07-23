@@ -10,7 +10,7 @@ describe('Cypress application', () => {
     });
   });
 
-  it.only('should have the ability to assert scheduled alert', () => {
+  it('should have the ability to assert scheduled alert', () => {
     cy.clock();
     cy.get('#timerAlertButton').click();
     cy.tick(5000);
@@ -37,9 +37,10 @@ describe('Cypress application', () => {
     cy.get('#confirmResult').should('have.text', 'You selected Cancel');
   });
 
-  it('should have the ability to enter text to alert', () => {
+  it.only('should have the ability to enter text to alert', () => {
+    const name = 'Danylo';
     cy.window().then((win) => {
-      cy.stub(win, 'prompt').returns('Danylo');
+      cy.stub(win, 'prompt').returns(name);
     });
     cy.get('#promtButton').click();
     cy.get('#promptResult').should('contain.text', `You entered ${name}`);

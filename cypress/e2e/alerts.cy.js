@@ -1,61 +1,51 @@
-/// <reference types='cypress' />
-
-describe('Book Store app', () => {
-
-  const user = {
-    username: 'Charlec',
-    password: 'Password123!'
-  };
-
-  const book = {
-    title: 'Speaking JavaScript',
-    author: 'Axel Rauschmayer',
-    publisher: 'O\'Reilly Media',
-    description: 'Like it or not, JavaScript is everywhere these days'
-  };
-
-  const alertMessage = {
-    added: 'Book added to your collection.',
-    deleted: 'Book deleted.'
-  };
-
-  beforeEach(() => {
-    cy.visit('/login');
+describe('Cypress application', () => {
+  beforeEach(() => { 
+    cy.visit('/');
   });
 
-  it('should allow to add a book to user\'s collection', () => {
-    cy.login(user.username, user.password);
-    cy.visit('/profile');
-
-    cy.contains('#item-2', 'Book Store').click();
-    cy.findByPlaceholder('Type to search').type(book.title);
-    cy.contains('a', book.title).click();
-
-    cy.get('#title-wrapper').should('contain', book.title);
-    cy.get('#author-wrapper').should('contain', book.author);
-    cy.get('#publisher-wrapper').should('contain', book.publisher);
-    cy.get('#description-wrapper').should('contain', book.description);
-
-    cy.contains('#addNewRecordButton', 'Add To Your Collection').click();
-
-    cy.on('window:alert', (alert) => {
-      expect(alert).to.equal(alertMessage.added);
-    });
-
-    cy.contains('#item-3', 'Profile').click();
-
-    cy.get('.mr-2').should('contain', book.title);
+  it('should have the ability to assert automatically resolved alerts', () => {
+    cy.pickId('alertButton').click();
+    cy.on('window:alert', (text) => {
+      expect(text).to.equal('You clicked a button');
+    })
   });
 
-  it('should allow to delete a book from user\'s collection', () => {
-    cy.login(user.username, user.password);
-    cy.visit('/profile');
+  it('should have the ability to assert scheduled allert', () => {
+    cy.pickId('timerAlertButton').click();
+    cy.wait(5000);
+    cy.on('window:alert', (text) => {
+      expect(text).to.equal('This alert appeared after 5 seconds');
+    })
+  });
 
-    cy.get('#delete-record-undefined').click();
-    cy.contains('button', 'OK').click();
-
-    cy.on('window:alert', (alert) => {
-      expect(alert).to.equal(alertMessage.deleted);
+  it('should autimatically resolve alerts', () => {
+    cy.pickId('confirmButton').click();
+    cy.wait(10000);
+    cy.on('window:confirm', (text) => {
+      expect(text).to.equal('Do you confirm action?');
+      return true;
     });
-});
-});
+    cy.get('[class="text-success"]').should('have.text', 'You selected Ok');
+  });
+
+  it('should have the ability to Cancel alerts', () => {
+    cy.pickId('confirmButton').click();
+    cy.wait(10000);
+    cy.on('window:confirm', (text) => {
+      expect(text).to.equal('Do you confirm action?');
+      return false;
+    });
+    cy.get('[class="text-success"]').should('have.text', 'You selected Cancel');
+  });
+
+  it('should have the ability to enter text to alert', () => {
+    
+    cy.window().then((window) => {
+      cy.stub(window, 'prompt').returns('my final message');
+    });
+
+    cy.pickId('promtButton').click();
+
+    cy.get('#promptResult').should('contain', 'You entered my final message');
+  });
+  });

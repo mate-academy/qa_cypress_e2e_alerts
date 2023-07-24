@@ -6,7 +6,7 @@ describe('Cypress application', () => {
   it('should have the ability to assert automatically resolved alerts', () => {
     cy.get('#alertButton').click();
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(`You clicked a button`);
+      expect(str).to.equal('You clicked a button');
     });
   });
 

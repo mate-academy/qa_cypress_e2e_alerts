@@ -24,6 +24,7 @@ describe('Cypress application', () => {
       expect(str).to.equal('Do you confirm action?');
       return true;
     });
+    cy.get('#confirmResult').should('contain', 'You selected Ok');
   });
 
   it('should have the ability to Cancel alerts', () => {
@@ -35,7 +36,7 @@ describe('Cypress application', () => {
     cy.get('#confirmResult').should('contain', 'You selected Cancel');
   });
 
-  it('should enter text into alert and assert its display', () => {
+  it('should have the ability to enter text to alert', () => {
     cy.window().then((win) => {
       cy.stub(win, 'prompt').returns('Polina');
     });

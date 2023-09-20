@@ -30,7 +30,6 @@ describe('Cypress application', () => {
     cy.get('#confirmButton').click();
     cy.on('window:alert', (confirmText) => {
       expect(confirmText).to.equal('Do you confirm action?');
-      return false;
     });
     cy.on('window:confirm', () => false);
     cy.get('#confirmResult').should('contain', 'You selected Cancel');

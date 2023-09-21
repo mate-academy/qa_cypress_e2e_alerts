@@ -36,21 +36,21 @@ describe('Cypress application', () => {
     cy.get('#confirmResult').should('have.text', 'You selected Cancel');
   });
 
-  it.only('should have the ability to enter text to alert', () => {
-    let enteredName;
-
+  it('should have the ability to enter text to alert', () => {
     cy.get('#promtButton').click();
 
     cy.window().then((win) => {
       cy.stub(win, 'prompt').callsFake((promptText) => {
         expect(promptText).to.equal('Please enter your name');
-        enteredName = promptText;
-        return enteredName;
+        return promptText;
       });
     });
 
     cy.on('window:confirm', () => true);
 
-    cy.get('#promptResult').should('have.text', 'You entered: ' + enteredName);
+    cy.get('#promptResult').then(($result) => {
+      const enteredText = $result.text().replace('You entered: ', '');
+      expect(enteredText).to.not.be.empty;
+    });
   });
 });

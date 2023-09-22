@@ -29,7 +29,7 @@ describe('Cypress application', () => {
     cy.on('window:confirm', () => {
       return true;
     });
-    cy.get(':nth-child(3) > .col-md-6').should('contain', 'You selected Ok');
+    cy.get('#confirmResult').should('contain', 'You selected Ok');
   });
 
   it('should have the ability to Cancel alerts', () => {

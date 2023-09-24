@@ -24,7 +24,7 @@ describe('Cypress application', () => {
       expect(str).to.equal('Do you confirm action?').click({ enter: true });
     });
 
-    cy.get('#confirmResult').should('exist');
+    cy.get('#confirmResult').should('contain', 'You selected Ok');
   });
 
   it('should click on the third button and choose cancel', () => {

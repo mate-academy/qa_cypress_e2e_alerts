@@ -12,8 +12,8 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to assert scheduled alert', () => {
-    cy.get('#timerAlertButton').click();
-    cy.wait(5000);
+    cy.get('#timerAlertButton')
+      .click();
     cy.on('window:alert', (text) => {
       expect(text).to.equal('This alert appeared after 5 seconds');
     });
@@ -42,9 +42,9 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to enter text to alert', () => {
-    let message = 'Something';
+    const message = 'Something';
     cy.window().then((win) => {
-      cy.stub(win, 'prompt').returns(`${message}`);
+      cy.stub(win, 'prompt').returns(message);
       cy.get('#promtButton').click();
       cy.get('#promptResult').should('contain', `You entered ${message}`);
     });

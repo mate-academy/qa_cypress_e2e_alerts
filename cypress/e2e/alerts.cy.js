@@ -41,5 +41,6 @@ describe('Cypress application', () => {
       cy.stub(win, 'prompt').returns('Yurii');
       cy.get('#promtButton').click();
     });
+    cy.get('#promptResult').should('contain', 'You entered Yurii');
   });
 });

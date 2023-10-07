@@ -9,6 +9,9 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert automatically resolved alerts', () => {
     cy.get('#alertButton').click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal(firstButton);
+    });
   });
 
   it('should have the ability to assert scheduled allert', () => {

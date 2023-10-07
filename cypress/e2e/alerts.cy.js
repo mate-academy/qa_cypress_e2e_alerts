@@ -3,36 +3,29 @@ describe('Cypress application', () => {
   cy.visit("https://demoqa.com/alerts")
   });
  
-  const firstButton = 'You clicked a button';
-  const secondButton = 'This alert appeared after 5 seconds';
-  const thirdButton = 'Do you confirm action?';
+  const firstNotification = 'You clicked a button';
+  const secondNotification = 'This alert appeared after 5 seconds';
+  const thirdNotification = 'Do you confirm action?';
 
   it('should have the ability to assert automatically resolved alerts', () => {
     cy.get('#alertButton').click();
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(firstButton);
+      expect(str).to.equal(firstNotification);
     });
   });
 
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton').click();
+    cy.wait(5000);
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(firstButton);
+      expect(str).to.equal(secondNotification);
     });
   });
 
   it('should autimatically resolve alerts', () => {
-    cy.get('#timerAlertButton').click()
-    cy.wait(5000);
+    cy.get('#confirmButton').click()
     cy.on('window:alert', (str) => {
-      expect(str).to.equal(secondButton);
-    });
-  });
-
-  it('should have the ability to Cancel alerts', () => {
-    cy.get('#confirmButton').click();
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(thirdButton);
+      expect(str).to.equal(thirdNotification);
     });
     cy.on('window:confirm', () => {
       return true;
@@ -40,7 +33,7 @@ describe('Cypress application', () => {
     cy.get('#confirmResult').should('contain', 'You selected Ok');
   });
 
-  it('should have the ability to enter text to alert', () => {
+  it('should have the ability to Cancel alerts', () => {
     cy.get('#confirmButton').click();
     cy.on('window:alert', (str) => {
       expect(str).to.equal(thirdButton);
@@ -50,4 +43,4 @@ describe('Cypress application', () => {
     });
     cy.get('#confirmResult').should('contain', 'You selected Cancel');
   });
-});
+  });

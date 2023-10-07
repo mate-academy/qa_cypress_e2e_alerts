@@ -33,5 +33,11 @@
   },
   "lint-staged": {
     "*.js": "eslint --max-warnings=0"
-  }
+  },
+  "name": "qa_cypress_e2e_alerts",
+  "description": "1. Fork the repo.\r 1. Clone **your** forked repository.\r 1. Run the command `npm i`.\r 1. Create a new branch `git checkout -b testing`.\r 1. Resolve tasks in the `cypress`/`e2e`/`alerts.cy.js`.\r 1. Check yourself before submitting the task with a [Cypress checklist](https://mate-academy.github.io/qa-program/checklists/cypress.html).\r 1. Create a pull request.\r 1. Do not forget to click on `Re-request review` if you submit the homework after previous review.",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "author": "",
+  "license": "ISC"
 }

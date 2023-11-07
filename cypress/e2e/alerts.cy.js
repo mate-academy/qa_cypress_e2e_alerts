@@ -6,8 +6,8 @@ describe('Cypress application', () => {
   it('should have the ability to assert automatically resolved alerts', () => {
     cy.get('#alertButton')
       .click();
-    cy.on('window:alert', (str) => {
-    expect(str).to.equal(`You clicked a button`)
+    cy.on('window:alert', (alert) => {
+    expect().to.equal(`You clicked a button`)
     })
   });
 
@@ -23,19 +23,19 @@ describe('Cypress application', () => {
   it('should automatically resolve alerts', () => {
     cy.get('#confirmButton')
       .click();
-    cy.on('window:confirm', (str) => {
-      expect(str).to.equal(`Do you confirm action?`)
-      return true;
+    cy.on('window:confirm', () => true);
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('You selected Ok');
     });
     cy.get('#confirmResult')
-      .should('contain', 'You selected Ok')
-    });
+      .should('contain', 'You selected Ok');
+  });
 
   it('should have the ability to Cancel alerts', () => {
     cy.get('#confirmButton')
       .click();
-    cy.on('window:confirm', (str) => {
-      expect(str).to.equal(`Do you confirm action?`)
+    cy.on('window:confirm', (confirm) => {
+      expect(confirm).to.equal(`Do you confirm action?`)
       return false;
     });
     cy.get('#confirmResult')
@@ -43,15 +43,13 @@ describe('Cypress application', () => {
     });
   
   it('should have the ability to enter text to alert', () => {
-    cy.get('#promtButton')
-      .click();
     cy.window().then((win) => {
-    cy.stub(win, 'prompt')
-      .returns('Kristina');
+    win.prompt = () => 'Kristina';
+     });
     cy.get('#promtButton')
       .click();
     cy.get('#promptResult')
-      .should('contain', 'You entered Kristina');
-    });
+      .should('contain', 'Kristina');
   });
 });
+

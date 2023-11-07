@@ -11,17 +11,17 @@ describe('Cypress application', () => {
     });
   });
 
-  it('should autimatically resolve alerts', () => {
+  it('should have the ability to assert scheduled allert', () => {
     cy.clock();
     cy.get('#timerAlertButton')
       .click();
-    cy.wait();
+    cy.tick(5000);
     cy.on('window:alert', (str) => {
       expect(str).to.equal(`This alert appeared after 5 seconds`);
     });
   });
 
-  it('should autimatically resolve alerts', () => {
+  it('should automatically resolve alerts', () => {
     cy.get('#confirmButton')
       .click();
     cy.on('window:alert', (str) => {

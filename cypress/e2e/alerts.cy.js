@@ -49,7 +49,7 @@ describe('Cypress application', () => {
       cy.get('#promtButton')
         .click();
       cy.get('#promptResult')
-        .should('contain', 'Vanya');
+        .should('contain', 'You entered Vanya'); 
     });
   });
 });

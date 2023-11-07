@@ -42,7 +42,7 @@ describe('Cypress application', () => {
     });
   });
 
-  it.only('should have the ability to enter text to alert', () => {
+  it('should have the ability to enter text to alert', () => {
     cy.get('#promtButton')
       .click();
     cy.on('window:prompt', (str) => {

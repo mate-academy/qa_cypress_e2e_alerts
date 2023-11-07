@@ -18,14 +18,13 @@ describe('Cypress application', () => {
   });
 });
 
-  it('should have the ability to assert scheduled allert', () => {
+  it.only('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton')
       .click();
     cy.on('window:alert', (alert) => {
       expect(alert).to.equal(alertMessage.allertAppearedAfterTime);
     cy.intercept('allertAppearedAfterTime')
-      .as('allertAppearedAfterTime');
-    cy.wait('@allertAppearedAfterTime')
+    cy.wait('@allertAppearedAfterTime');
   });
 });
     

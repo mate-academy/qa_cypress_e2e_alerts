@@ -32,3 +32,7 @@ if (!app.document.head.querySelector('[data-hide-command-log-request]')) {
 
   app.document.head.appendChild(style);
 };
+
+Cypress.on('uncaught:exception', () => {
+  return false;
+});

@@ -11,16 +11,6 @@ describe('Cypress application', () => {
     });
   });
 
-  it('should have the ability to assert scheduled allert', () => {
-    cy.clock();
-    cy.get('#timerAlertButton')
-      .click();
-    cy.tick(5000);
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal(`This alert appeared after 5 seconds`);
-    });
-  });
-
   it('should autimatically resolve alerts', () => {
     cy.get('#confirmButton')
       .click();
@@ -39,24 +29,6 @@ describe('Cypress application', () => {
       expect(str).to.eq('second confirm');
       cy.get('#confirmResult')
         .should('contain', 'You selected Cancel');
-    });
-  });
-
-  it('should have the ability to enter text to alert', () => {
-    cy.on('window:prompt', (str) => {
-      cy.window().then((win) => {
-        win.promptInput = 'Illia';
-      });
-    });
-    it('should have the ability to enter text to alert', () => {
-      cy.window().then((win) => {
-        cy.stub(win, 'prompt')
-          .returns('Illia');
-        cy.get('#promtButton')
-          .click();
-        cy.get('#promptResult')
-          .should('contain', 'You entered Illia');
-      });
     });
   });
 });

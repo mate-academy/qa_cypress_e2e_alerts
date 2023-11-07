@@ -1,7 +1,7 @@
 describe('Cypress application', () => {
   const alertMessage = {
     clickedAButton: 'You clicked a button',
-    allertAppearedAfter5Sec: 'This alert appeared after 5 seconds',
+    alertAppearedAfter5Sec: 'This alert appeared after 5 seconds',
     doYouConfirmAction: 'Do you confirm action?',
     enterYourName: 'Please enter your name'
   };
@@ -25,14 +25,14 @@ describe('Cypress application', () => {
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(5000);
     cy.on('window:alert', (alert) => {
-      expect(alert).to.equal(alertMessage.allertAppearedAfter5Sec);
+      expect(alert).to.equal(alertMessage.alertAppearedAfter5Sec);
     });
   });
 
   it('should autimatically resolve alerts', () => {
     cy.get('#confirmButton')
       .click();
-    cy.on('window:allert', (alert) => {
+    cy.on('window:alert', (alert) => {
       expect(alert).to.equal(alertMessage.doYouConfirmAction);
     });
     cy.get('#confirmResult')

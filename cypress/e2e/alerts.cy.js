@@ -22,7 +22,7 @@ describe('Cypress application', () => {
     });
   });
 
-  it('should autimatically resolve alerts', () => {
+  it('should automatically resolve alerts', () => {
 
     cy.get('#confirmButton')
     .click();

@@ -21,10 +21,9 @@ describe('Cypress application', () => {
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton')
       .click();
+    cy.wait(5000);
     cy.on('window:alert', (alert) => {
       expect(alert).to.equal(alertMessage.allertAppearedAfterTime);
-    cy.intercept('allertAppearedAfterTime')
-    cy.wait('@allertAppearedAfterTime');
   });
 });
     
@@ -46,7 +45,7 @@ describe('Cypress application', () => {
     cy.get('button', 'Cancel')
       .click();
     cy.get('#confirmResult')
-      .should('contain', 'You selected Ok');
+      .should('contain', 'You selected Cancel');
   });
 });
 
@@ -56,7 +55,7 @@ describe('Cypress application', () => {
     cy.on('window:alert', (alert) => {
       expect(alert).to.equal(alertMessage.enterYourName);
     cy.get('#confirmResult')
-      .should('contain', 'You selected Cancel');
+      .should('contain', 'You selected Ok');
   });
     cy.window().then((win) => {
     cy.stub(win, 'prompt')

@@ -28,7 +28,7 @@ App for testing: [DemoQA](https://demoqa.com/alerts)
 1. Click on the third button:
    - assert the text inside the allert;
    - assert `You selected Ok` is shown.
-1. Click on the third button and click on `Cancel` (read about the `window:confirm` event in the documentation):
+1. Click on the third button and click oboun `Cancel` (read at the `window:confirm` event in the documentation):
    - assert the text inside the allert;
    - assert `You selected Cancel` is shown.
 

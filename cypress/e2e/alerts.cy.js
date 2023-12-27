@@ -1,8 +1,8 @@
 describe('Cypress application', () => {
   beforeEach(() => {
-    cy.visit('https://demoqa.com/alerts');
   });
   it('should have the ability to assert automatically resolved alerts', () => {
+    cy.visit('https://demoqa.com/alerts');
     cy.get('#alertButton').click();
     cy.on('window:alert', (alert) => {
       expect(alert).to.equal(`You clicked a button`);
@@ -10,6 +10,7 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to assert scheduled allert', () => {
+    cy.visit('https://demoqa.com/alerts');
     cy.clock();
     cy.get('#timerAlertButton').click();
     cy.tick(5000);
@@ -19,6 +20,7 @@ describe('Cypress application', () => {
   });
 
   it('should autimatically resolve alerts', () => {
+    cy.visit('https://demoqa.com/alerts');
     cy.get('#confirmButton').click();
     cy.on('window:alert', (alert) => {
       expect(alert).to.equal(`Do you confirm action?`);
@@ -27,7 +29,11 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to Cancel alerts', () => {
+    cy.visit('https://demoqa.com/alerts');
     cy.get('#confirmButton').click();
+    cy.on('window:confirm', (alert) => {
+      expect(alert).to.equal('Do you confirm action?');
+    });
     cy.on('window:confirm', () => false);
     cy.get('#confirmResult').should('contain', 'You selected Cancel');
   });

@@ -33,7 +33,5 @@ cy.visit('https://demoqa.com/alerts');
     });
     cy.contains('#confirmResult', 'You selected Cancel').should('contain', 'You selected Cancel');
 })
-  it('should have the ability to enter text to alert', () => {
-
-  });
+  
 });

@@ -41,6 +41,10 @@ describe('Cypress application', () => {
     cy.get('#promtButton').click();
     cy.window().then((win) => {  
   cy.stub(win, 'prompt').returns('Olga') 
+    });
+    cy.on('window:confirm', () => true);
+    cy.get('#promtButton').click();
+    cy.get('#promptResult').should('contain', 'Olga');
 })
 
   });

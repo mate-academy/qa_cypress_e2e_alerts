@@ -30,6 +30,7 @@ describe('Cypress application', () => {
     cy.on('window:confirm', (str) => {
       expect(str).to.equal(`Do you confirm action?`);
     });
+    cy.contains('#confirmResult', 'You selected Ok');
   });
 
   it('should have the ability to Cancel alerts', () => {
@@ -40,6 +41,7 @@ describe('Cypress application', () => {
       expect(str).to.equal(`Do you confirm action?`);
       return false;
     });
+    cy.contains('#confirmResult', 'You selected Cancel');
   });
 
   it('should have the ability to enter text to alert', () => {

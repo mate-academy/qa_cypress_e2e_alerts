@@ -27,7 +27,7 @@ describe('Cypress application', () => {
     });
   });
 
-  it('should autimatically resolve alerts', () => {
+  it('should automatically resolve alerts', () => {
     cy.get('#confirmButton').click();
     cy.on('window:confirm', (alertText) => {
       expect(alertText).to.equal('Do you confirm action?');
@@ -41,8 +41,4 @@ describe('Cypress application', () => {
     cy.on('window:confirm', () => false);
     cy.get('.text-success').should('contain', 'You selected Cancel');
   });
-
-  // it('should have the ability to enter text to alert', () => {
-  //   cy.get('#promtButton').click();
-  // });
 });

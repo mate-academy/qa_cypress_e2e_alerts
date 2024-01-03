@@ -26,10 +26,3 @@
 Cypress.Commands.add('findByPlaceholder', (placeholder) => {
   cy.get(`[placeholder="${placeholder}"]`);
 });
-
-// Cypress.Commands.add('login', () => {
-//   cy.request({
-//     method: 'POST',
-//     url: 'https://demoqa.com/Account/v1/Login',
-//   });
-// });

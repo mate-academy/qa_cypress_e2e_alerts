@@ -27,7 +27,7 @@ describe('Cypress application', () => {
     cy.get('.alert').should('not.exist');
   });
 
-  it('should autimatically resolve alerts', () => {
+  it('should automatically resolve alerts', () => {
     cy.get('#confirmButton').click();
     cy.on('window:confirm', (alert) => {
       expect(alert).to.equal('Do you confirm action?');

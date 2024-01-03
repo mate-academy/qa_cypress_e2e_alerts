@@ -25,7 +25,7 @@ describe('Cypress application', () => {
       expect(alerts).to.equal('Do you confirm action?');
     });
 
-    cy.get('#confirmResult').contains('You selected Ok');
+    cy.get('#confirmResult').should('You selected Ok');
   });
 
   it('4should have the ability to Cancel alerts', () => {
@@ -36,14 +36,14 @@ describe('Cypress application', () => {
       return false;
     });
 
-    cy.get('#confirmResult').contains('You selected Cancel');
+    cy.get('#confirmResult').should('You selected Cancel');
   });
 
   it('5should have the ability to enter text to alert', () => {
     cy.window().then((win) => {
-      cy.stub(win, 'prompt').returns('Ivanna');
+      cy.stub(win, 'prompt').returns('Maksym');
       cy.get('#promtButton').click();
-      cy.get('#promptResult').contains('You entered Ivanna');
+      cy.get('#promptResult').should('You entered Maksym');
     });
   });
 });

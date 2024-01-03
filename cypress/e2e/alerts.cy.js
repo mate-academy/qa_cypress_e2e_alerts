@@ -18,7 +18,7 @@ cy.visit('https://demoqa.com/alerts');
     })
   });
 
-  it('should autimatically resolve alerts', () => {
+  it('should automatically resolve alerts', () => {
     cy.get('#confirmButton').click();
     cy.on('window:confirm', (str) => {
       expect(str).to.equal(`Do you confirm action?`);

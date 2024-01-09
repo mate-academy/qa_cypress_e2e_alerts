@@ -12,6 +12,7 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton').click();
+    cy.wait(6000);
     cy.on('window:alert', (alertText) => {
       expect(alertText).to.equal('This alert appeared after 5 seconds');
     });
@@ -35,6 +36,10 @@ describe('Cypress application', () => {
   });
 
   it('should have the ability to enter text to alert', () => {
-
+    cy.window().then((win) => {
+      cy.stub(win, 'prompt').returns('Natalie');
+      cy.get('#promtButton').click();
+      cy.get('#promptResult').should('contain', 'Natalie');
+    });
   });
 });

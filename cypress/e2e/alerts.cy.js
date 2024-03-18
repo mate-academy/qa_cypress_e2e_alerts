@@ -29,7 +29,7 @@ describe('Cypress application', () => {
     cy.get('#confirmResult').should('contain.text', 'You selected Ok');
   });
 
-  it('should autimatically resolve alerts', () => {
+  it('should have the ability to Cancel alerts', () => {
     cy.get('#confirmButton').click();
     cy.on('window:confirm', (string) => {
       expect(string).to.equal('Do you confirm action?');

@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('getById', (id) => {
+  cy.get(id).click();
+});
+
+Cypress.Commands.add('checkAlert', (text) => {
+  cy.on('window:alert', (string) => {
+    expect(string).to.equal(text);
+  });
+});

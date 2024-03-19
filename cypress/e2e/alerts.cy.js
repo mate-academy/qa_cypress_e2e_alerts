@@ -1,7 +1,9 @@
 describe('Cypress application', () => {
-  before(() => {
-    cy.visit('/alerts')
+  beforeEach(() => {
+    cy.visit('/alerts');
   });
+
+  const message = 'my message';
 
   it('should have the ability to assert automatically resolved alerts', () => {
     cy.get('#alertButton').click();
@@ -37,9 +39,9 @@ describe('Cypress application', () => {
 
   it('should have the ability to enter text to alert', () => {
       cy.window().then((win) => {
-      cy.stub(win, 'prompt').returns('my message');
+      cy.stub(win, 'prompt').returns(message);
     });
       cy.get('#promtButton').click();
-      cy.get('#promptResult').should('contain.text', 'You entered my message');
+      cy.get('#promptResult').should('contain.text', 'You entered ' + message);
   });
 });

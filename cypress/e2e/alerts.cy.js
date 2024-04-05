@@ -1,7 +1,4 @@
 describe('Cypress application', () => {
-  before(() => {
-
-  });
   beforeEach(() => {
     cy.visit('/');
   });
@@ -14,7 +11,7 @@ describe('Cypress application', () => {
     });
   });
 
-  it.only('should have the ability to assert scheduled allert', () => {
+  it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton').click();
 
     cy.on('window:alert', (alert) => {
@@ -38,5 +35,15 @@ describe('Cypress application', () => {
       return false;
     });
     cy.get('#confirmResult').should('contain', 'You selected Cancel');
+  });
+
+  it('should have the ability to enter text to alert', () => {
+    cy.window()
+      .then((win) => {
+        cy.get('#promtButton').click();
+        cy.stub(win, 'prompt').returns('Polina');
+      });
+    cy.get('#promptResult')
+      .should('contain', 'You entered Polina');
   });
 });

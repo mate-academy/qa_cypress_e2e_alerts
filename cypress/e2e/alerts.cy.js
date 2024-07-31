@@ -15,6 +15,8 @@ describe('Cypress application', () => {
 
   it('should have the ability to assert scheduled allert', () => {
     cy.get('#timerAlertButton').click();
+    // eslint-disable-next-line
+    cy.wait(5000);
     cy.on('window:alert', (alert) => {
       expect(alert).to.equal('You clicked a button');
     });

@@ -13,7 +13,6 @@ describe('Cypress Alerts', () => {
 
   it('should assert scheduled alerts', () => {
     cy.get('#timerAlertButton').click();
-    // Waiting for the alert to appear by listening to the window:alert event
     cy.on('window:alert', (alertText) => {
       expect(alertText).to.equal('This alert appeared after 5 seconds');
     });

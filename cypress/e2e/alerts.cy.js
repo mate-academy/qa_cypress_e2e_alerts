@@ -1,5 +1,6 @@
 /// <reference types='cypress' />
 const faker = require('faker');
+
 describe('Cypress application', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -15,8 +16,8 @@ describe('Cypress application', () => {
 
   it('should be able to assert alerts that are scheduled', () => {
     cy.get('#timerAlertButton').click();
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(5000);
+    cy.clock();
+    cy.tick(5000);
 
     cy.on('window:alert', (alertText) => {
       expect(alertText).to.equal('This alert appeared after 5 seconds');
@@ -33,15 +34,17 @@ describe('Cypress application', () => {
       return randomChoice;
     });
 
-    if (randomChoice) {
-      cy.contains('#confirmResult', 'You selected Ok').then(() => {
-        cy.log('User chose: Ok');
-      });
-    } else {
-      cy.contains('#confirmResult', 'You selected Cancel').then(() => {
-        cy.log('User chose: Cancel');
-      });
-    }
+    cy.wrap(randomChoice).then((choice) => {
+      if (choice) {
+        cy.contains('#confirmResult', 'You selected Ok').then(() => {
+          cy.log('User chose: Ok');
+        });
+      } else {
+        cy.contains('#confirmResult', 'You selected Cancel').then(() => {
+          cy.log('User chose: Cancel');
+        });
+      }
+    });
   });
 
   it('should be able to enter text in alerts', () => {

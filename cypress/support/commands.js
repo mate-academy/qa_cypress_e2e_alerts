@@ -1,25 +1,22 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+/// <reference types='cypress' />
+
+Cypress.Commands.add('getButtonById', (id) => {
+  cy.get(`#${id}`).should('be.visible').click();
+});
+
+Cypress.Commands.add('confirmResult', (selector, expectedText) => {
+  cy.get(selector).should('be.visible').and('contain.text', expectedText);
+});
+
+Cypress.Commands.add('handleAlert', (expectedText) => {
+  cy.on('window:alert', (text) => {
+    expect(text).to.eq(expectedText);
+    return true;
+  });
+});
+
+Cypress.Commands.add('handleConfirm', (expectedText) => {
+  cy.on('window:confirm', (text) => {
+    expect(text).to.eq(expectedText);
+  });
+});
